@@ -109,6 +109,12 @@ app.post('/api/stripe/webhook',
 app.get("/", (req, res) => {
   res.send("Servidor Stripe funcionando!");
 });
+const path = require("path");
+app.use(express.static(__dirname)); // Permite servir arquivos estáticos (como HTML)
+
+app.get("/pagamento-sucesso", (req, res) => {
+  res.sendFile(path.join(__dirname, "pagamento-sucesso.html"));
+});
 
 // -------------------------
 // Iniciar servidor
@@ -116,3 +122,4 @@ app.get("/", (req, res) => {
 app.listen(process.env.PORT || 3000, () =>
   console.log("Servidor rodando na porta 3000")
 );
+
